@@ -14,6 +14,7 @@ namespace GSApp1
     public partial class KASHIWA : Form
     {
         delegate void SetTextCallback(string text);
+        Logger log = Logger.GetInstance();
 
         public KASHIWA()
         {
@@ -93,23 +94,48 @@ namespace GSApp1
             //byte[] packet = Sending_command.ToString().Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
             string[] command = Sending_command.ToString().Split(' ');
             int count = 0;
-            foreach (string i in command)
-            {
-                Console.WriteLine(i);
-                //Console.WriteLine(i);
-                byte[] array = new byte[1];
-                array[0] = ;
-                //Console.WriteLine(array);
-                serialPort1.Write(array, 0, 1);
-                await Task.Delay(1000);
-                count++;
-            }
-            Console.Write("カウント{0}\n", count);
+            
             try
             {
                 
+                foreach (string i in command)
+                {
+
+                    //Console.WriteLine(i);
+                    byte[] array = new byte[1];
+                    array[0] = Convert.ToByte(i, 16);
+                    //Console.WriteLine(i);
+                    //Console.WriteLine(array[0]);
+                    //Console.WriteLine(array);
+                    serialPort1.Write(array, 0, 1);
+                    await Task.Delay(250);
+                    count++;
+                }
+                string str = "送信:[" + Sending_command + "]";
+                log.Info(str);
+                Console.Write("カウント{0}\n", count);
                 
                 //serialPort1.Write(tbxTxData.Text);
+                //確認用
+                /*
+                byte[] array = new byte[14];
+                array[0] = 0x01;
+                array[1] = 0x02;
+                array[2] = 0x03;
+                array[3] = 0x01;
+                array[4] = 0x02;
+                array[5] = 0x03;
+                array[6] = 0x01;
+                array[7] = 0x02;
+                array[8] = 0x03;
+                array[9] = 0x01;
+                array[10] = 0x02;
+                array[11] = 0x03;
+                array[12] = 0x02;
+                array[13] = 0x03;
+                serialPort1.Write(array, 0, 1);
+                */
+                await Task.Delay(250);
                 if (rbCRLF.Checked) serialPort1.Write("\r\n");
                 if (rbLF.Checked) serialPort1.Write("\n");
                 
@@ -123,13 +149,21 @@ namespace GSApp1
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            Console.WriteLine("反応！");
+            string strDataReceived = "";
+            byte[] buf = new byte[serialPort1.BytesToRead];
             try
             {
-                Console.WriteLine("BytesToRead {0}", serialPort1.BytesToRead);
-                Console.WriteLine("ReadByte {0}", serialPort1.ReadByte());
-                Console.WriteLine("ReadExisting {0}", serialPort1.ReadExisting());
-                Console.WriteLine("\n\n");
-                SetText(serialPort1.ReadExisting());
+                //Console.WriteLine(buf.Length);
+                serialPort1.Read(buf, 0, buf.Length);
+                //Console.WriteLine("BytesToRead {0}", serialPort1.BytesToRead);
+                //Console.WriteLine("ReadByte {0}", serialPort1.ReadByte());
+                //Console.WriteLine("ReadExisting {0}", serialPort1.ReadExisting());
+                Console.WriteLine("{0}\n\n", BitConverter.ToString(buf));
+                strDataReceived = BitConverter.ToString(buf) + "\r\n";
+                SetText(strDataReceived);
+                string str = "受信:[" + BitConverter.ToString(buf) + "]";
+                log.Info(str);
             }
             catch
             {
