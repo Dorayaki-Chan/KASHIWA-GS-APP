@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Windows.Forms;
@@ -15,12 +16,14 @@ namespace GSApp1
     {
         delegate void SetTextCallback(string text);
         Logger log = Logger.GetInstance();
+        HandleCSV csvData = new HandleCSV();
 
         public KASHIWA()
         {
             InitializeComponent();
             scanCOMPorts();
             cmbBaud.SelectedIndex = 3; //初期値は9600
+          
         }
         private void scanCOMPorts()
         {
@@ -136,8 +139,6 @@ namespace GSApp1
                 serialPort1.Write(array, 0, 1);
                 */
                 await Task.Delay(250);
-                if (rbCRLF.Checked) serialPort1.Write("\r\n");
-                if (rbLF.Checked) serialPort1.Write("\n");
                 
             }
             catch
@@ -197,5 +198,16 @@ namespace GSApp1
         {
 
         }
+
+        private void telCmdListReadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = openFileDialog1.ShowDialog();
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                Console.WriteLine(openFileDialog1.FileName);
+                csvData.readCSV(openFileDialog1.FileName);
+            }
+        }
+
     }
 }

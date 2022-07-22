@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandleCSV.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MainDisplay.cs">
       <SubType>Form</SubType>

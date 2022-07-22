@@ -39,10 +39,15 @@
             this.cmbCOMPort = new System.Windows.Forms.ComboBox();
             this.tbxRxData = new System.Windows.Forms.TextBox();
             this.cmbBaud = new System.Windows.Forms.ComboBox();
-            this.rbCRLF = new System.Windows.Forms.RadioButton();
-            this.rbLF = new System.Windows.Forms.RadioButton();
-            this.rbNone = new System.Windows.Forms.RadioButton();
             this.tbxTxData = new System.Windows.Forms.MaskedTextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.telCmdListReadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.その他ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ログToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ログファイル閲覧ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPort1
@@ -137,38 +142,6 @@
             this.cmbBaud.Text = "-ボーレート選択-";
             this.cmbBaud.SelectedIndexChanged += new System.EventHandler(this.cmbBaud_SelectedIndexChanged);
             // 
-            // rbCRLF
-            // 
-            this.rbCRLF.AutoSize = true;
-            this.rbCRLF.Checked = true;
-            this.rbCRLF.Location = new System.Drawing.Point(331, 148);
-            this.rbCRLF.Name = "rbCRLF";
-            this.rbCRLF.Size = new System.Drawing.Size(52, 16);
-            this.rbCRLF.TabIndex = 9;
-            this.rbCRLF.TabStop = true;
-            this.rbCRLF.Text = "CRLF";
-            this.rbCRLF.UseVisualStyleBackColor = true;
-            // 
-            // rbLF
-            // 
-            this.rbLF.AutoSize = true;
-            this.rbLF.Location = new System.Drawing.Point(425, 148);
-            this.rbLF.Name = "rbLF";
-            this.rbLF.Size = new System.Drawing.Size(36, 16);
-            this.rbLF.TabIndex = 10;
-            this.rbLF.Text = "LF";
-            this.rbLF.UseVisualStyleBackColor = true;
-            // 
-            // rbNone
-            // 
-            this.rbNone.AutoSize = true;
-            this.rbNone.Location = new System.Drawing.Point(519, 148);
-            this.rbNone.Name = "rbNone";
-            this.rbNone.Size = new System.Drawing.Size(49, 16);
-            this.rbNone.TabIndex = 11;
-            this.rbNone.Text = "None";
-            this.rbNone.UseVisualStyleBackColor = true;
-            // 
             // tbxTxData
             // 
             this.tbxTxData.Location = new System.Drawing.Point(58, 113);
@@ -178,15 +151,64 @@
             this.tbxTxData.TabIndex = 12;
             this.tbxTxData.Text = "0000000000000000000000000000";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "\"CSVファイル(*.csv)|*.csv|すべてのファイル(*.*)|*.*\"";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ファイルToolStripMenuItem,
+            this.その他ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ファイルToolStripMenuItem
+            // 
+            this.ファイルToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.telCmdListReadToolStripMenuItem});
+            this.ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
+            this.ファイルToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.ファイルToolStripMenuItem.Text = "ファイル";
+            // 
+            // telCmdListReadToolStripMenuItem
+            // 
+            this.telCmdListReadToolStripMenuItem.Name = "telCmdListReadToolStripMenuItem";
+            this.telCmdListReadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.telCmdListReadToolStripMenuItem.Text = "テレコマリスト読み込み";
+            this.telCmdListReadToolStripMenuItem.Click += new System.EventHandler(this.telCmdListReadToolStripMenuItem_Click);
+            // 
+            // その他ToolStripMenuItem
+            // 
+            this.その他ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ログToolStripMenuItem});
+            this.その他ToolStripMenuItem.Name = "その他ToolStripMenuItem";
+            this.その他ToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.その他ToolStripMenuItem.Text = "その他";
+            // 
+            // ログToolStripMenuItem
+            // 
+            this.ログToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ログファイル閲覧ToolStripMenuItem});
+            this.ログToolStripMenuItem.Name = "ログToolStripMenuItem";
+            this.ログToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.ログToolStripMenuItem.Text = "ログ";
+            // 
+            // ログファイル閲覧ToolStripMenuItem
+            // 
+            this.ログファイル閲覧ToolStripMenuItem.Name = "ログファイル閲覧ToolStripMenuItem";
+            this.ログファイル閲覧ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.ログファイル閲覧ToolStripMenuItem.Text = "ログファイル閲覧";
+            // 
             // KASHIWA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tbxTxData);
-            this.Controls.Add(this.rbNone);
-            this.Controls.Add(this.rbLF);
-            this.Controls.Add(this.rbCRLF);
             this.Controls.Add(this.cmbBaud);
             this.Controls.Add(this.tbxRxData);
             this.Controls.Add(this.cmbCOMPort);
@@ -195,10 +217,14 @@
             this.Controls.Add(this.btnClode);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnScan);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "KASHIWA";
             this.Text = "KASHIWA-GS-APP";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,10 +241,14 @@
         private System.Windows.Forms.ComboBox cmbCOMPort;
         private System.Windows.Forms.TextBox tbxRxData;
         private System.Windows.Forms.ComboBox cmbBaud;
-        private System.Windows.Forms.RadioButton rbCRLF;
-        private System.Windows.Forms.RadioButton rbLF;
-        private System.Windows.Forms.RadioButton rbNone;
         private System.Windows.Forms.MaskedTextBox tbxTxData;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem telCmdListReadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem その他ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ログToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ログファイル閲覧ToolStripMenuItem;
     }
 }
 
